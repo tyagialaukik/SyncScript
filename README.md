@@ -1,4 +1,6 @@
 # SyncScript
+> 🔗 Live Demo: https://sync-script-opal.vercel.app
+
 A real-time collaborative code editor built with React, Node.js, Socket.io, Redis, and MongoDB.
 
 ![Status](https://img.shields.io/badge/status-live-brightgreen) ![Stack](https://img.shields.io/badge/stack-MERN%20%2B%20Redis-blue)

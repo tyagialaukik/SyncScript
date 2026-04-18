@@ -14,7 +14,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://sync-script-opal.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE"],
   },
 });
@@ -25,7 +25,9 @@ pubClient.on('error', err => console.error('Redis pub:', err))
 subClient.on('error', err => console.error('Redis sub:', err))
 io.adapter(createAdapter(pubClient, subClient))
 
-app.use(cors());
+app.use(cors({
+  origin: "https://sync-script-opal.vercel.app"
+}));
 app.use(express.json());
 
 // Routes
