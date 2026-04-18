@@ -139,7 +139,7 @@ const Editor = ({ docId, userId, userColor }) => {
         return
       }
 
-      const response = await fetch("http://localhost:3001/api/docs/execute", {
+      const response = await fetch("https://syncscript-uwpi.onrender.com/api/docs/execute", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ code, language })
