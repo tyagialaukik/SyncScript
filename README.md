@@ -38,7 +38,7 @@ Run locally:
 Terminal 1: cd server && npx nodemon index.js
 Terminal 2: cd client && npm run dev
 
-Open http://localhost:5173, enter your name and room code, share URL to collaborate.
+Open https://sync-script-opal.vercel.app, enter your name and room code, share the URL to collaborate instantly.
 
 ## Resume Highlight
 Engineered a real-time collaborative engine using Socket.io and Redis, maintaining state synchronization across 100+ concurrent clients with sub-50ms latency.
