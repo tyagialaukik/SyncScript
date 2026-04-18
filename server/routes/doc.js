@@ -32,44 +32,41 @@ router.post("/", (req, res) => {
 
 router.post("/execute", async (req, res) => {
   const { code, language } = req.body
-  
-  const fileNames = {
-    javascript: "main.js",
-    typescript: "main.ts", 
-    python: "main.py",
-    java: "Main.java",
-    cpp: "main.cpp"
-  }
 
-  const fileName = fileNames[language] || "main.js"
-  const langMap = {
-    javascript: "javascript",
-    typescript: "typescript",
-    python: "python",
-    java: "java",
-    cpp: "cpp"
+  const languageIds = {
+    javascript: 93,
+    typescript: 74,
+    python: 71,
+    java: 62,
+    cpp: 54
   }
 
   try {
     const fetch = (await import("node-fetch")).default
+    const langId = languageIds[language] || 93
+
     const response = await fetch(
-      `https://glot.io/api/run/${langMap[language] || "javascript"}/latest`,
+      "https://ce.judge0.com/submissions?base64_encoded=false&wait=true",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          files: [{ name: fileName, content: code }]
+          source_code: code,
+          language_id: langId,
+          stdin: ""
         })
       }
     )
     const data = await response.json()
     res.json({
       stdout: data.stdout || "",
-      stderr: data.stderr || data.error || "",
-      code: data.stderr ? 1 : 0
+      stderr: data.stderr || data.compile_output || "",
+      code: data.exit_code || 0
     })
   } catch (err) {
-    res.status(500).json({ stderr: err.message, stdout: "", code: 1 })
+    res.status(500).json({ 
+      stderr: err.message, stdout: "", code: 1 
+    })
   }
 })
 
